@@ -14,7 +14,7 @@ public class GreatestCommonDivisible {
      * @param b
      * @return
      */
-    private static int getGreatestCommonDivisible(int a, int b){
+    private static int getGreatestCommonDivisible01(int a, int b){
         int big = a;
         int small = b;
         if (big % small == 0){
@@ -28,9 +28,40 @@ public class GreatestCommonDivisible {
         return 1;
     }
 
+    /**
+     * 使用辗转相除法求出最大公约数
+     * @param a
+     * @param b
+     * @return
+     */
+    private static int getGreatestCommonDivisible02(int a, int b){
+        int big = a > b ? a : b;
+        int small = a < b ? a : b;
+        if (big % small == 0){
+            return small;
+        }
+        return getGreatestCommonDivisible02(big/small, small);
+    }
+
+    /**
+     * 使用更相减损术求出最大公约数
+     * @param a
+     * @param b
+     * @return
+     */
+    private static int getGreatestCommonDivisible03(int a, int b){
+
+        if (a == b){
+            return a;
+        }
+        int big = a > b ? a : b;
+        int small = a < b ? a : b;
+        return getGreatestCommonDivisible03(big-small, small);
+    }
+
     public static void main(String[] args) {
-        System.out.println(getGreatestCommonDivisible(25, 5));
-        System.out.println(getGreatestCommonDivisible(100, 10));
-        System.out.println(getGreatestCommonDivisible(27, 14));
+        System.out.println(getGreatestCommonDivisible01(25, 5));
+        System.out.println(getGreatestCommonDivisible02(100, 10));
+        System.out.println(getGreatestCommonDivisible03(27, 14));
     }
 }
